@@ -28,7 +28,7 @@ object Repository:
     def getAllNotes(): Seq[Note] =
       files.map { file =>
         val bytes = Files.readAllBytes(file)
-        read[Note](bytes)
+        read[Note](bytes, true)
       }
 
     def saveNote(note: Note): Unit =

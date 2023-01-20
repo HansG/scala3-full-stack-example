@@ -30,11 +30,11 @@ object WebServer extends MainRoutes:
     StaticResource(s"assets/$fileName", getClass.getClassLoader, headers)
 
   @cask.getJson("api/notes")
-  def getAllNotes(): Seq[Note] = repository.getAllNotes()
+  def getAllNotes(): Seq[Note2] = repository.getAllNotes().map(_.dup)
 
   @cask.postJson("api/notes")
-  def createNote(title: String, content: String): Note =
-    repository.createNote(title, content)
+  def createNote(title: String, content: String): Note2 =
+    repository.createNote(title, content).dup
 
   @cask.delete("api/notes/:id")
   def deleteNote(id: String): Boolean =

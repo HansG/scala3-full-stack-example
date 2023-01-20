@@ -12,13 +12,13 @@ import upickle.default.*
 
 class HttpClient(using ExecutionContext):
 
-  def getAllNotes(): Future[Seq[Note]] =
+  def getAllNotes(): Future[Seq[Note2]] =
     for
       resp <- Fetch.fetch("./api/notes").toFuture
-      notes <- resp.to[Seq[Note]]
+      notes <- resp.to[Seq[Note2]]
     yield notes
 
-  def createNote(title: String, content: String): Future[Note] =
+  def createNote(title: String, content: String): Future[Note2] =
     val request = Request(
       "./api/notes",
       new:
@@ -28,7 +28,7 @@ class HttpClient(using ExecutionContext):
     )
     for
       resp <- Fetch.fetch(request).toFuture
-      note <- resp.to[Note]
+      note <- resp.to[Note2]
     yield note
 
   def deleteNote(id: String): Future[Boolean] =
@@ -46,5 +46,5 @@ class HttpClient(using ExecutionContext):
     private def to[T: Reader]: Future[T] =
       if resp.ok then
         for json <- resp.text().toFuture
-        yield read[T](json)
+        yield read[T](json, true)
       else Future.failed(new IOException(resp.statusText))
