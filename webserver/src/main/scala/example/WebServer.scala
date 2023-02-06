@@ -33,7 +33,8 @@ object WebServer extends MainRoutes:
   def getAllNotes(): Seq[Note] = repository.getAllNotes()
 
   @cask.postJson("api/notes")
-  def createNote(title: String, content: String): Note =
+  def createNote(title: String, content: String, contentx: String): Note =
+    println(contentx)
     repository.createNote(title, content)
 
   @cask.delete("api/notes/:id")
