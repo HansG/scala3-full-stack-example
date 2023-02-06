@@ -24,7 +24,7 @@ class HttpClient(using ExecutionContext):
       new:
         method = HttpMethod.POST
         headers = js.Dictionary("Content-Type" -> "application/json")
-        body = write(ujson.Obj("title" -> title, "content" -> content))
+        body = write(ujson.Obj("title" -> title, "content" -> content, "contentx" -> ("X:"+content)))
     )
     for
       resp <- Fetch.fetch(request).toFuture
@@ -46,5 +46,7 @@ class HttpClient(using ExecutionContext):
     private def to[T: Reader]: Future[T] =
       if resp.ok then
         for json <- resp.text().toFuture
-        yield read[T](json, true)
+        yield
+          println("extension json read: "+json)
+          read[T](json, true)
       else Future.failed(new IOException(resp.statusText))
