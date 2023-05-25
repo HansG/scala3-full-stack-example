@@ -34,6 +34,12 @@ lazy val core = crossProject(JSPlatform, JVMPlatform)
   .settings(
     libraryDependencies ++= Seq(
       "com.lihaoyi" %%% "upickle" % "2.0.0",
-      "org.scalameta" %%% "munit" % "1.0.0-M3" % Test
+      "org.scalameta" %%% "munit" % "1.0.0-M3" % Test,
+      //https://softwaremill.com/how-to-serialize-case-class-to-json-in-scala-3-and-scala-2-using-circe/  :
+      "com.softwaremill.sttp.client3" %% "core" % "3.8.15",
+      "com.softwaremill.sttp.client3" %% "circe" % "3.8.15",
+      "io.circe" %% "circe-core" % "0.14.5",
+      "io.circe" %% "circe-generic" % "0.14.5",
+      "io.circe" %% "circe-parser" % "0.14.5"
     )
   )
