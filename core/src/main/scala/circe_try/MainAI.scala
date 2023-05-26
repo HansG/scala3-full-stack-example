@@ -5,7 +5,7 @@ import circe_try.CompletionsResponse
 import sttp.client3.*
 import sttp.client3.circe.circeBodySerializer
 import io.circe.syntax.*
-import sttp.model.Uri
+import sttp.model.Uri 
 
 
 //https://softwaremill.com/how-to-serialize-case-class-to-json-in-scala-3-and-scala-2-using-circe/
