@@ -38,6 +38,11 @@ lazy val core = crossProject(JSPlatform, JVMPlatform)
       "com.softwaremill.sttp.client3" %% "core" % "3.8.15",
       "com.softwaremill.sttp.client3" %% "circe" % "3.8.15",
       "io.circe" %% "circe-core" % "0.14.5",
-      "io.circe" %% "circe-parser" % "0.14.5"
+      "io.circe" %% "circe-parser" % "0.14.5",
+      "io.circe" %% "circe-generic" % "0.14.5",
+      "junit" % "junit" % "4.13.2",
+      "org.typelevel" %% "cats-effect" % "3.5.0",
+      "org.typelevel" %% "munit-cats-effect-3" % "1.0.7"
+      //"io.circe" %% "circe-generic-extras" % "0.14.5"
     )
   )

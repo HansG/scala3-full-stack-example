@@ -15,10 +15,13 @@ object CompletionsResponse {
                                   choices: Seq[Choices],
                                   usage: Usage
                                 )
-  //  derives ConfiguredDecoder   - alternativ (semi-manuell):
+   derives ConfiguredDecoder   
+  
+  /*  "..derives ConfiguredDecoder" alternativ (semi-manuell):
   object CompletionsResponse {
     given Decoder[CompletionsResponse] = deriveDecoder[CompletionsResponse]
   }
+  */
 
   case class Choices(
                       text: String,
@@ -26,17 +29,21 @@ object CompletionsResponse {
                       logprobs: Option[String],
                       finishReason: String
                     )
-   // derives ConfiguredDecoder
+    derives ConfiguredDecoder
+  
+  /*
    object Choices {
      given Decoder[Choices] = ConfiguredDecoder.derived  //(using config)
    }
+  */
 
   case class Usage(promptTokens: Int, completionTokens: Int, totalTokens: Int) 
-    //derives ConfiguredDecoder
+    derives ConfiguredDecoder
 
+  /*
   object Usage {
     given Decoder[Usage] = ConfiguredDecoder.derived  //(using config)
   }
-  
+  */
 
 }

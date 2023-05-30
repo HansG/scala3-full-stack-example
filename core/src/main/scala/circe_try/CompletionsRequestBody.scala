@@ -24,14 +24,17 @@ object CompletionsRequestBody {
                               logitBias: Option[Map[String, Float]] = None,
                               user: Option[String] = None
                             )
-    //derives ConfiguredEncoder
+    derives ConfiguredEncoder
 
+  /* alternativ zu "...derives ConfiguredEncoder" mit "given Configuration...":
   object CompletionsBody {
-    given Encoder[CompletionsBody] = ConfiguredEncoder.derived  //alternativ explizit:(using config) -
-    // zuvor: private val config = Configuration.default.withSnakeCaseMemberNames
+    given Encoder[CompletionsBody] = ConfiguredEncoder.derived  //alternativ explizit mit:(using config) -
+    // dazu: private val config = Configuration.default.withSnakeCaseMemberNames
   }
-
-  sealed trait Prompt
+  */
+  enum Prompt:
+    case SinglePrompt(value: String)
+    case MultiplePrompt(values: Seq[String])
 
   object Prompt {
     given Encoder[Prompt] = {
@@ -40,10 +43,12 @@ object CompletionsRequestBody {
     }
   }
 
-  case class SinglePrompt(value: String) extends Prompt
-  case class MultiplePrompt(values: Seq[String]) extends Prompt
 
-  sealed trait Stop
+  enum Stop:
+    case SingleStop(value: String)
+    case MultipleStop(values: Seq[String])
+
+
   object Stop {
     given Encoder[Stop] = {
       case SingleStop(value)    => Json.fromString(value)
@@ -51,6 +56,4 @@ object CompletionsRequestBody {
     }
   }
 
-  case class SingleStop(value: String) extends Stop
-  case class MultipleStop(values: Seq[String]) extends Stop
 }
