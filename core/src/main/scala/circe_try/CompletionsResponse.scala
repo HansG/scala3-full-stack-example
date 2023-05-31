@@ -17,7 +17,7 @@ object CompletionsResponse {
                                 )
    derives ConfiguredDecoder   
   
-  /*  "..derives ConfiguredDecoder" alternativ (semi-manuell):
+  /*  alternativ "..derives ConfiguredDecoder" - semi-manuell:
   object CompletionsResponse {
     given Decoder[CompletionsResponse] = deriveDecoder[CompletionsResponse]
   }
